@@ -1,0 +1,41 @@
+# Test node status
+GET http://51.12.217.169:3001/status
+
+###
+# Check inventory
+GET http://digivader.com:3041/inventory
+
+###
+# Send a test block
+POST http://localhost:3000/block
+Content-Type: application/json
+
+{
+  "timestamp": 1707843647000,
+  "data": "Test block data",
+  "previousHash": "0000"
+}
+
+###
+# Send a test transaction
+POST http://localhost:3000/inv
+Content-Type: application/json
+
+{
+  "timestamp": 1707843647000,
+  "data": "Test transaction data",
+  "signature": "dummy-sig",
+  "id": "tx-123"
+}
+
+###
+# Check another node's inventory (port 3001)
+GET http://localhost:3002/inventory
+
+###
+# Check node's inventory (port 3000)
+GET http://localhost:3000/inventory
+
+###
+# Get blocks
+GET http://localhost:3000/getblocks
